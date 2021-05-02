@@ -1,24 +1,29 @@
 const crypto = require('crypto');
 const https = require('https');
+require('dotenv').config();
 
-const apiKey = "add api key here";
-const privateKey = "add private key here";
+const apiKey = process.env.API_KEY;
+const privateKey = process.env.PRIVATE_KEY;
 const baseUrl = "api.btcmarkets.net";
 
-function postHttp (path, dataObj) {
+const postHttp = (path, dataObj) => {
     const data = JSON.stringify(dataObj);
     const now = Date.now();
     var message =  path + "\n" + now + "\n";
+
     if (data) {
         message += data;
     }
+
     const signature = signMessage(privateKey, message);
+
     let headers = {
         "Accept": "application/json",
         "Accept-Charset": "UTF-8",
         'Content-Length': Buffer.byteLength(data),
         "Content-Type": "application/json",
     };
+
     headers.apikey = apiKey;
     headers.timestamp = now;
     headers.signature = signature;
@@ -42,14 +47,14 @@ function postHttp (path, dataObj) {
 
 };
 
-function signMessage(secret, message) {
+const signMessage = (secret, message) => {
     var key = Buffer.from(secret, 'base64');
     var hmac = crypto.createHmac('sha512', key);
     var signature = hmac.update(message).digest('base64');
     return signature;
 }
 
-function getOpenOrdersByMarket() {
+const getOpenOrdersByMarket = () => {
     const data = {
         currency: 'AUD',
         instrument: 'XRP',

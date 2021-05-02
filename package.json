@@ -1,0 +1,23 @@
+{
+  "name": "api-client-node",
+  "version": "1.0.0",
+  "description": "Basic sample demonstrating API authentication in node.js",
+  "main": "client.js",
+  "scripts": {
+    "start": "node client.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BTCMarkets/api-client-node.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BTCMarkets/api-client-node/issues"
+  },
+  "homepage": "https://github.com/BTCMarkets/api-client-node#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "eslint": "^7.25.0"
+  }
+}
